@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { Observable, of } from 'rxjs';
+import { MessageService } from './message.service';
 import { Song } from './song';
 import { PLAYLIST } from './mock-playlist';
 
@@ -8,12 +10,14 @@ import { PLAYLIST } from './mock-playlist';
 
 export class SongService {
 
-  constructor() { 
+  constructor(private messageService: MessageService) { 
 
   }
 
-  getSongs(): Song[] {
-  	return PLAYLIST;
+  getSongs(): Observable<Song[]> {
+  	// TODO: send the message _after_ fetching the songs
+  	this.messageService.add('SongService: fetched songs')
+  	return of(PLAYLIST);
   }
 
 }

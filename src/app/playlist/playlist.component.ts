@@ -26,7 +26,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   getSongs(): void {
-    this.songs = this.songService.getSongs();
+    this.songService.getSongs().subscribe(songs => this.songs = songs);
   }
 
 }
