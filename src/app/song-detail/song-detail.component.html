@@ -1,0 +1,11 @@
+<div *ngIf="song">
+
+	<h2>{{song.name | uppercase}} Details</h2>
+	<div><span>ID: </span>{{song.id}}</div>
+	<div> <span>Name: </span>{{song.name}}</div>
+	<div>
+		<label>Notes:
+			<input [(ngModel)]="song.notes" placeholder="notes"/>
+		</label>
+	</div>
+</div>

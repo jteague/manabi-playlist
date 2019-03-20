@@ -1,0 +1,11 @@
+<h2>Setlist:</h2>
+
+<ul class="songs">
+	<li *ngFor="let song of songs" 
+		[class.selected]="song === selectedSong"
+		(click)="onSelect(song)">
+		<span class="badge">{{song.id}}</span> {{song.name}}
+	</li>
+</ul>
+
+<app-song-detail [song]="selectedSong"></app-song-detail>
