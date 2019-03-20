@@ -1,5 +1,7 @@
 # ManabiPlaylist
 
+Simple web application to for a band to use to take quick notes during a performance/gig. The app needs a playlist and then anyone connecting to the web-app can add notes that can be viewed later at rehearsal.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.6.
 
 ## Development server
