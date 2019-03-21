@@ -20,4 +20,10 @@ export class SongService {
   	return of(PLAYLIST);
   }
 
+  getSong(id: number): Observable<Song> {
+  	// TODO: send the message _after_ fetching the song
+  	this.messageService.add(`SongService: fetched song id: ${id}`);
+  	return of(PLAYLIST.find(song => song.id === id));
+  }
+
 }

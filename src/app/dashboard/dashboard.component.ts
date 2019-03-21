@@ -3,17 +3,17 @@ import { Song } from '../song';
 import { SongService } from '../song.service';
 
 @Component({
-  selector: 'app-playlist',
-  templateUrl: './playlist.component.html',
-  styleUrls: ['./playlist.component.css']
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
 
-export class PlaylistComponent implements OnInit {
+export class DashboardComponent implements OnInit {
 
   songs: Song[] = [];
 
   constructor(private songService: SongService) { 
-    
+
   }
 
   ngOnInit() {
@@ -21,7 +21,7 @@ export class PlaylistComponent implements OnInit {
   }
 
   getSongs() : void {
-    this.songService.getSongs().subscribe(songs => this.songs = songs);
+  	this.songService.getSongs().subscribe(songs => this.songs = songs.slice(1, 5));
   }
 
 }
