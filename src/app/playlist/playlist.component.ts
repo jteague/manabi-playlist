@@ -10,11 +10,9 @@ import { SongService } from '../song.service';
 
 export class PlaylistComponent implements OnInit {
 
-  songs: Song[] = [];
+  songs: Song[];
 
-  constructor(private songService: SongService) { 
-    
-  }
+  constructor(private songService: SongService) { }
 
   ngOnInit() {
 	 this.getSongs();

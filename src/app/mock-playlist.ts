@@ -1,7 +1,22 @@
 import { Song } from './song';
-
 export const PLAYLIST: Song[] = [
-	{ id: 1, name: "Mi Gente", notes: "" },
-	{ id: 2, name: "Loralas", notes: "" },
-	{ id: 3, name: "Cali P", notes: "" }
+	// { id: 0, name: "Sway", notes: "" },
+	// { id: 1, name: "Como abeja al panal", notes: "" }, 
+	// { id: 2, name: "Cali pachanguero", notes: "" },
+	// { id: 3, name: "Lloraras", notes: "" },
+	// { id: 4, name: "Rebelión", notes: "" },
+	// { id: 5, name: "Las caleñas son como las flores", notes: "" },
+	// { id: 6, name: "Si me dejas no vale", notes: "" },
+	// { id: 7, name: "Lo que va a pasar", notes: "" },
+	// { id: 8, name: "Hello", notes: "" },
+	// { id: 9, name: "Cumbia sobre el mar ", notes: "" },
+	// { id: 10, name: "La vida es un carnaval ", notes: "" },
+	// { id: 11, name: "Casi un hechizo", notes: "" },
+	// { id: 12, name: "Tu cariñito", notes: "" },
+	// { id: 13, name: "El preso ", notes: "" },
+	// { id: 14, name: "La agarro bajando ", notes: "" },
+	// { id: 15, name: "Tu eres ajena ", notes: "" },
+	// { id: 16, name: "Anacaona", notes: "" },
+	// { id: 17, name: "Quimbara", notes: "" },
+	// { id: 18, name: "Vivir mi vida", notes: "" },
 ];
