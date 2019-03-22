@@ -6,7 +6,8 @@
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
-  width: 15em;
+  width: 20em;
+  display: inline-block;
 }
 .songs li {
   cursor: pointer;
@@ -32,7 +33,8 @@
   text-decoration: none;
   position: relative;
   display: block;
-  width: 250px;
+  width: 300px;
+  margin-top: .2em;
 }
 .songs a:hover {
   color:#607D8B;
@@ -50,22 +52,8 @@
   line-height: 1em;
   position: absolute;
   left: -1px;
-  top: -4px;
-  height: 1.8em;
+  top: -8px;
+  height: 1.9em;
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
-}
-
-button {
-  background-color: #eee;
-  border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
-  cursor: pointer;
-  cursor: hand;
-  font-family: Arial;
-}
-
-button:hover {
-  background-color: #cfd8dc;
 }

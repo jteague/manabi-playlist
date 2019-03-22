@@ -6,7 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { SongDetailComponent } from './song-detail/song-detail.component';
 
 const routes: Routes = [
-	{ path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+	{ path: '', redirectTo: '/playlist', pathMatch: 'full' },
 	{ path: 'dashboard', component: DashboardComponent },
 	{ path: 'playlist', component: PlaylistComponent },
 	{ path: 'detail/:id', component: SongDetailComponent },
