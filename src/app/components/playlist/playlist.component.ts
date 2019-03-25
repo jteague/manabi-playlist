@@ -2,10 +2,10 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { SongService } from '../services/songservice/song.service';
-import { GigService } from '../services/gigservice/gig.service';
-import { Song } from '../objects/song';
-import { Gig } from '../objects/gig';
+import { SongService } from '../../services/songservice/song.service';
+import { GigService } from '../../services/gigservice/gig.service';
+import { Song } from '../../objects/song';
+import { Gig } from '../../objects/gig';
 
 @Component({
   selector: 'app-playlist',

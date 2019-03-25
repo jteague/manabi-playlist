@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Gig } from '../objects/gig';
-import { GigService } from '../services/gigservice/gig.service';
+import { Gig } from '../../objects/gig';
+import { GigService } from '../../services/gigservice/gig.service';
 
 @Component({
   selector: 'app-dashboard',

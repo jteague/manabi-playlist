@@ -8,11 +8,12 @@ import { InMemoryDataService } from './services/inmemorydata/in-memory-data.serv
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { PlaylistComponent } from './playlist/playlist.component';
-import { SongDetailComponent } from './song-detail/song-detail.component';
-import { MessagesComponent } from './messages/messages.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { SongSearchComponent } from './song-search/song-search.component';
+
+import { PlaylistComponent } from './components/playlist/playlist.component';
+import { SongDetailComponent } from './components/song-detail/song-detail.component';
+import { MessagesComponent } from './components/messages/messages.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { SongSearchComponent } from './components/song-search/song-search.component';
 
 @NgModule({
   declarations: [
