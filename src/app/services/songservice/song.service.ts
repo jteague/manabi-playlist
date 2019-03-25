@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { MessageService } from './message.service';
-import { Song } from './song';
+
+import { MessageService } from '../message/message.service';
+import { Song } from '../../objects/song';
+import { Gig } from '../../objects/gig';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -16,16 +18,25 @@ const httpOptions = {
 export class SongService {
 
   private songsUrl : string = 'api/songs'; // URL to the web api
+  //private gigsUrl : string = 'api/gigs'; // URL to the web api
 
   constructor(
   	private http: HttpClient,
   	private messageService: MessageService) { }
 
-  getSongs(): Observable<Song[]> {
+  getAllSongs(): Observable<Song[]> {
+    	// get songs from the server
+      const url = `${this.songsUrl}`;
+    	return this.http.get<Song[]>(url).pipe(
+          tap(_ => this.log(`fetched all songs`)),
+          catchError(this.handleError<Song[]>('getSongs', [])));
+    }
+
+  getSongs(gigId: number): Observable<Song[]> {
   	// get songs from the server
-  	return this.http.get<Song[]>(this.songsUrl)
-      .pipe(
-        tap(_ => this.log('fetched songs')),
+    const url = `${this.songsUrl}/?gig_id=${gigId}`;
+  	return this.http.get<Song[]>(url).pipe(
+        tap(_ => this.log(`fetched songs (gig: ${gigId})`)),
         catchError(this.handleError<Song[]>('getSongs', [])));
   }
 

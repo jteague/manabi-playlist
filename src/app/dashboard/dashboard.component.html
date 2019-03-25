@@ -1,9 +1,12 @@
-<h3>Top Songs</h3>
+<h3>Current Gigs</h3>
 
-<div class="grid grid-pad">
-  <a *ngFor="let song of songs" class="col-1-4" routerLink="/detail/{{song.id}}">
-    <div class="module song">
-      <h4>{{song.name}}</h4>
-    </div>
-  </a>
+<div class="centered">
+  <div class="grid grid-pad">
+    <a *ngFor="let gig of gigs" class="col-1-4" routerLink="/playlist/{{gig.id}}">
+      <div class="module gig">
+        <h2>{{gig.venue}}</h2>
+        {{gig.date | date: 'MM/dd/yyyy'}}
+      </div>
+    </a>
+  </div>
 </div>

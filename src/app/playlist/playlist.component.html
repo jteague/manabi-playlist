@@ -1,11 +1,13 @@
-<h2>Setlist:</h2>
+<div *ngIf="gig">
 
-<app-song-search></app-song-search>
+	<h2>{{gig.venue}} ({{gig.date | date: 'MM/dd/yyyy'}}) Setlist:</h2>
 
-<ul class="songs">
-	<li *ngFor="let song of songs">
-		<a routerLink="/detail/{{song.id}}">
+	<app-song-search></app-song-search>
+
+	<ul class="songs">
+		<li *ngFor="let song of songs" routerLink="/detail/{{song.id}}">
 			<span class="badge">{{song.id}}</span> {{song.name}}
-		</a>
-	</li>
-</ul>
+		</li>
+	</ul>
+
+</div>

@@ -1,8 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
-import { SongService } from '../song.service';
-import { Song } from '../song';
+
+import { SongService } from '../services/songservice/song.service';
+import { Song } from '../objects/song';
 
 @Component({
   selector: 'app-song-detail',
