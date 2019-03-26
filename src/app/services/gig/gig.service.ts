@@ -6,6 +6,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from '../message/message.service';
 import { Gig } from '../../objects/gig';
 
+
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
@@ -24,8 +25,7 @@ export class GigService {
 
   getGigs(): Observable<Gig[]> {
   	// get gigs from the server
-  	return this.http.get<Gig[]>(this.gigsUrl)
-      .pipe(
+  	return this.http.get<Gig[]>(this.gigsUrl).pipe(
         tap(_ => this.log('fetched gigs')),
         catchError(this.handleError<Gig[]>('getGigs', [])));
   }
@@ -33,8 +33,7 @@ export class GigService {
   /** GET gig by id. Return `undefined` when id not found */
   getGigNo404<Data>(id: number): Observable<Gig> {
     const url = `${this.gigsUrl}/?id=${id}`;
-    return this.http.get<Gig[]>(url)
-      .pipe(
+    return this.http.get<Gig[]>(url).pipe(
         map(gigs => gigs[0]), // returns a {0|1} element array
         tap(h => {
           const outcome = h ? `fetched` : `did not find`;
@@ -71,7 +70,8 @@ export class GigService {
   }
 
   private log(message: string) : void {
-    this.messageService.add(`GigService: ${message}`);
+    //this.messageService.add(`GigService: ${message}`);
+    console.log(`GigService: ${message}`);
   }
 
   private handleError<T> (opertaion = 'operation', result? : T) {
@@ -80,7 +80,7 @@ export class GigService {
       console.error(error); // log to local console
 
       // todo: better job of transforming error for the user
-      this.log('${operation} failed: ${error.message}');
+      //this.log('${operation} failed: ${error.message}');
 
       // let the app keep running with 'bad' data
       return of(result as T);

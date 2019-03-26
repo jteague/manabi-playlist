@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Gig } from '../../objects/gig';
-import { GigService } from '../../services/gigservice/gig.service';
+import { GigService } from '../../services/gig/gig.service';
+import { UtilitiesService } from '../../services/utilities/utilities.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,11 +12,13 @@ import { GigService } from '../../services/gigservice/gig.service';
 export class DashboardComponent implements OnInit {
 
   gigs: Gig[] = [];
+  userGuid: string;
 
-  constructor(private gigService: GigService) { }
+  constructor(private gigService: GigService, private utilities: UtilitiesService) { }
 
   ngOnInit() {
 	 this.getGigs();
+   this.userGuid = this.utilities.getUserGuid();
   }
 
   getGigs() : void {

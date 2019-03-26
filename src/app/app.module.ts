@@ -15,6 +15,8 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SongSearchComponent } from './components/song-search/song-search.component';
 
+import { WindowRef } from './services/windowref/window-ref.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +39,7 @@ import { SongSearchComponent } from './components/song-search/song-search.compon
       InMemoryDataService, { dataEncapsulation: false}
     )
   ],
-  providers: [],
+  providers: [WindowRef],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

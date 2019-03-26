@@ -2,10 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { SongService } from '../../services/songservice/song.service';
-import { GigService } from '../../services/gigservice/gig.service';
+import { SongNotesService } from '../../services/song-notes/song-notes.service';
+import { SongNote } from '../../objects/song-note';
 import { Song } from '../../objects/song';
 import { Gig } from '../../objects/gig';
+import { UtilitiesService } from '../../services/utilities/utilities.service';
 
 @Component({
   selector: 'app-playlist',
@@ -16,23 +17,28 @@ import { Gig } from '../../objects/gig';
 export class PlaylistComponent implements OnInit {
 
   @Input() gig: Gig;
-  songs: Song[];
+  songNotes: SongNote[];
+  userGuid: string;
+  gigDb: Gig;
 
   constructor(
   	private route: ActivatedRoute,
-  	private songService: SongService,
-    private gigService: GigService,
-  	private location: Location
+  	private songNotesService: SongNotesService,
+  	private location: Location,
+    private utilities: UtilitiesService
   	) { }
 
   ngOnInit() {
-	 this.getSongs();
+    this.userGuid = this.utilities.getUserGuid();
+    this.getSongs();
   }
 
   getSongs() : void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.gigService.getGig(id).subscribe(g => this.gig = g);
-  	this.songService.getSongs(id).subscribe(s => this.songs = s);
+    const gigid = +this.route.snapshot.paramMap.get('id');
+    this.songNotesService.getSongNotes(gigid, this.userGuid).subscribe(sn => {
+      this.songNotes = sn;
+      this.gig = sn[0].gig;
+    });
   }
 
 }

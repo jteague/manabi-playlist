@@ -81,7 +81,8 @@ export class SongService {
   }
 
   private log(message: string) : void {
-    this.messageService.add(`SongService: ${message}`);
+    //this.messageService.add(`SongService: ${message}`);
+    console.log(`SongService: ${message}`);
   }
 
   private handleError<T> (opertaion = 'operation', result? : T) {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Song } from '../../objects/song';
-import { SongService } from '../../services/songservice/song.service';
+import { SongService } from '../../services/song/song.service';
 
 @Component({
   selector: 'app-song-search',
