@@ -19,7 +19,8 @@ const httpOptions = {
 export class SongNotesService {
 
   // http://jeremiahteague.com/manabiplaylistserver
-  private songNotesUrl : string = 'api/songNotes'; // URL to the web api
+  private songNotesUrl : string = 'http://jeremiahteague.com/manabi_playlist_server/songNotes.php'; // URL to the web api
+  //private songNotesUrl : string = 'api/songNotes'; // URL to the web api
 
   constructor(
   	private http: HttpClient,
@@ -27,18 +28,37 @@ export class SongNotesService {
 
     getSongNotes(gigId: number, user: string): Observable<SongNote[]> {
       console.log(`we're in SongNotesService.getSongNotes(gigId: ${gigId}, user: ${user})`);
-      const url = `${this.songNotesUrl}/?id=${gigId}`; // TODO: add the user guid string to the search
+      const url = `${this.songNotesUrl}?operation=get&gig_id=${gigId}&user_uid=${user}`;
       return this.http.get<SongNote[]>(url).pipe(
           tap(_ => this.log(`fetched songNotes count: ${[].length}`)),
           catchError(this.handleError<SongNote[]>('getSongNotes', [])));
     }
 
-    getSongNote(id: number): Observable<SongNote> {
-      const url = `${this.songNotesUrl}/?id=${id}`;
+    getSongNote(id: number, user: string): Observable<SongNote> {
+      const url = `${this.songNotesUrl}?operation=get&id=${id}&user_uid=${user}`;
     	return this.http.get<SongNote>(url).pipe(
         tap(_ => this.log(`fetched songNote id=${id}`)),
         catchError(this.handleError<SongNote>(`getSongNote id=${id}`))
       )
+    }
+
+    updateSong(songNote: SongNote, user: string) {
+      if(songNote.user != user) {
+        console.log('Your user id does not match this song_note\'s user id');
+        return;
+      }
+
+      const url = `${this.songNotesUrl}?operation=update`;
+      url += `&id=${songNote.id}`;
+      url += `&notes=${songNote.notes}`;
+      url += `&badHorns=${songNote.badHorns}`;
+      url += `&badRhythm=${songNote.badRhythm}`;
+      url += `&badStart=${songNote.badStart}`;
+      url += `&badEnd=${songNote.badEnd}`;
+      return this.http.put(url, songNote, httpOptions).pipe(
+        tap(_ => this.log(`updated songNote id=${songNote.id}`)),
+        catchError(this.handleError<any>('updateSongNote'))
+      );
     }
 
     private log(message: string) : void {

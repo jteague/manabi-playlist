@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getGigs() : void {
-  	this.gigService.getGigs().subscribe(gigs => this.gigs = gigs.slice(0, 3));
+  	this.gigService.getGigs().subscribe(gigs => this.gigs = gigs);
   }
 
 }

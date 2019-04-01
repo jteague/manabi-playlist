@@ -17,7 +17,8 @@ const httpOptions = {
 
 export class GigService {
 
-  private gigsUrl : string = 'api/gigs'; // URL to the web api
+  private gigsUrl : string = 'http://jeremiahteague.com/manabi_playlist_server/gig.php'; // URL to the web api
+  //private gigsUrl : string = 'api/gigs'; // URL to the web api
 
   constructor(
   	private http: HttpClient,
@@ -25,22 +26,10 @@ export class GigService {
 
   getGigs(): Observable<Gig[]> {
   	// get gigs from the server
-  	return this.http.get<Gig[]>(this.gigsUrl).pipe(
-        tap(_ => this.log('fetched gigs')),
+    const url = `${this.gigsUrl}?operation=get`;
+  	return this.http.get<Gig[]>(url).pipe(
+        tap(_ => this.log(`fetched gigs`)),
         catchError(this.handleError<Gig[]>('getGigs', [])));
-  }
-
-  /** GET gig by id. Return `undefined` when id not found */
-  getGigNo404<Data>(id: number): Observable<Gig> {
-    const url = `${this.gigsUrl}/?id=${id}`;
-    return this.http.get<Gig[]>(url).pipe(
-        map(gigs => gigs[0]), // returns a {0|1} element array
-        tap(h => {
-          const outcome = h ? `fetched` : `did not find`;
-          this.log(`${outcome} gig id=${id}`);
-        }),
-        catchError(this.handleError<Gig>(`getGig id=${id}`))
-      );
   }
 
   getGig(id: number): Observable<Gig> {

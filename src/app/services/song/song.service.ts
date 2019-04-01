@@ -17,7 +17,8 @@ const httpOptions = {
 
 export class SongService {
 
-  private songsUrl : string = 'api/songs'; // URL to the web api
+  private songsUrl : string = 'http://jeremiahteague.com/manabi_playlist_server/song.php'; // URL to the web api
+  //private songsUrl : string = 'api/songs'; // URL to the web api
   //private gigsUrl : string = 'api/gigs'; // URL to the web api
 
   constructor(
@@ -26,7 +27,7 @@ export class SongService {
 
   getAllSongs(): Observable<Song[]> {
     	// get songs from the server
-      const url = `${this.songsUrl}`;
+      const url = `${this.songsUrl}?operation=get`;
     	return this.http.get<Song[]>(url).pipe(
           tap(_ => this.log(`fetched all songs`)),
           catchError(this.handleError<Song[]>('getSongs', [])));

@@ -2,8 +2,11 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { SongService } from '../../services/song/song.service';
+import { UtilitiesService } from '../../services/utilities/utilities.service';
+import { SongNotesService } from '../../services/song-notes/song-notes.service';
 import { Song } from '../../objects/song';
+import { Gig } from '../../objects/gig'
+import { SongNote } from '../../objects/song-note';
 
 @Component({
   selector: 'app-song-detail',
@@ -13,21 +16,24 @@ import { Song } from '../../objects/song';
 
 export class SongDetailComponent implements OnInit {
 
-  @Input() song: Song;
+  @Input() songNote: SongNote;
+  userGuid: string;
 
   constructor(
   	private route: ActivatedRoute,
-  	private songService: SongService,
-  	private location: Location
+  	private songNotesService: SongNotesService,
+  	private location: Location,
+    private utilities: UtilitiesService
   	) { }
 
   ngOnInit() {
+    this.userGuid = this.utilities.getUserGuid();
   	this.getSong();
   }
 
   getSong(): void {
-  	const id = +this.route.snapshot.paramMap.get('id');
-  	this.songService.getSong(id).subscribe(song => this.song = song);
+  	const songNoteId = +this.route.snapshot.paramMap.get('id');
+  	this.songNotesService.getSongNote(songNoteId, this.userGuid).subscribe(sn => this.songNote = sn);
   }
 
   goBack(): void {
@@ -35,6 +41,6 @@ export class SongDetailComponent implements OnInit {
   }
 
   save() : void {
-    this.songService.updateSong(this.song).subscribe(() => this.goBack());
+    this.songNotesService.updateSong(this.songNote, this.userGuid).subscribe(() => this.goBack());
   }
 }

@@ -1,15 +1,16 @@
-<div *ngIf="song">
+<div *ngIf="songNote">
 
-	<h2>{{song.name | uppercase}}</h2>
+	<h2>{{songNote.song.name | uppercase}}</h2>
+
 	<!-- <div><span class="label">ID: </span>{{song.id}}</div> -->
 	<!-- <div> <span class="label">Name: </span>{{song.name}}</div> -->
-	<div> <span class="label">Bad Horns: </span><input type="checkbox" [(ngModel)]="song.badHorns" /></div>
-	<div> <span class="label">Bad Rhythm: </span><input type="checkbox" [(ngModel)]="song.badRhythm" /></div>
-	<div> <span class="label">Bad Start: </span><input type="checkbox" [(ngModel)]="song.badStart" /></div>
-	<div> <span class="label">Bad End: </span><input type="checkbox" [(ngModel)]="song.badEnd" /></div>
+	<div> <span class="label">Bad Horns: </span><input type="checkbox" [(ngModel)]="songNote.badHorns" /></div>
+	<div> <span class="label">Bad Rhythm: </span><input type="checkbox" [(ngModel)]="songNote.badRhythm" /></div>
+	<div> <span class="label">Bad Start: </span><input type="checkbox" [(ngModel)]="songNote.badStart" /></div>
+	<div> <span class="label">Bad End: </span><input type="checkbox" [(ngModel)]="songNote.badEnd" /></div>
 	<div>
 		<label><span class="label">Notes:</span>
-			<textarea [(ngModel)]="song.notes" rows="4" cols="20" placeholder="notes..."></textarea>
+			<textarea [(ngModel)]="songNote.notes" rows="4" cols="20" placeholder="notes..."></textarea>
 		</label>
 	</div>
 	<div>
