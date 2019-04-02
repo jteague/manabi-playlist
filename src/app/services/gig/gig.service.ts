@@ -3,9 +3,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
+
 import { MessageService } from '../message/message.service';
 import { Gig } from '../../objects/gig';
-
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -17,8 +18,7 @@ const httpOptions = {
 
 export class GigService {
 
-  private gigsUrl : string = 'http://jeremiahteague.com/manabi_playlist_server/gig.php'; // URL to the web api
-  //private gigsUrl : string = 'api/gigs'; // URL to the web api
+  private gigsUrl : string = `${environment.apiUrl}gig.php`; // URL to the web api
 
   constructor(
   	private http: HttpClient,

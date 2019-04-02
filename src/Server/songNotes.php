@@ -1,4 +1,5 @@
 <?php
+#$putdata = fopen("php://input", "r");
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 require_once ("database.php");
@@ -15,8 +16,8 @@ $operation = isset($_GET['operation'])
     : "";
 
 if(!$operation) {
-    $conn->close();
-    return;
+    #$conn->close();
+    #return;
 }
 
 switch($operation) {
@@ -37,19 +38,83 @@ switch($operation) {
         echo("insert is not implemented");
         break;
     case "update":
-        echo("update is not implemented");
+		$getJson = json_decode($_POST['songNote']);
+		#$getJson = json_decode(file_get_contents("php://input"), false);
+		#$getJson = json_decode($_GET['songNote'], false);
+        updateSongNote($conn, $getJson);
         break;
     case "delete":
         echo("delete is not implemented");
         break;
     default:
-        echo("$operation not implemented");
+		mylog("songNotes.php::operation = '$operation'");
+		$putdata = file_get_contents('php://input');
+        if(isset($putdata)) {
+			mylog("putdata: $putdata");
+			$getJson = json_decode($putdata, false);
+			//mylog("getJson: $getJson");
+			updateSongNote($conn, $getJson);
+		} else {
+			mylog("no putdata");
+		}
+		
         break;
 }
 
 #-------------------------------------------------------------------------------
 # Functions that house the queries:
 #-------------------------------------------------------------------------------
+
+function updateSongNote($connection, $songNote) {
+	
+	if(!$songNote) {
+		mylog("empty songNote");
+		return;
+	}
+	
+	$id = $songNote->songNote->id;
+	if(!$id) {
+		mylog("empty songNote ID");
+		return;
+	}
+	
+	$query = "UPDATE song_note SET ";
+	if($songNote->songNote->notes) {
+		$notes = $songNote->songNote->notes;
+		$query .= " notes = '$notes', ";
+	}
+	if($songNote->songNote->badHorns) {
+		$badHorns = $songNote->songNote->badHorns;
+		$query .= " badHorns = '$badHorns', ";
+	}
+	if($songNote->songNote->badRhythm) {
+		$badRhythm = $songNote->songNote->badRhythm;
+		$query .= " badRhythm = '$badRhythm', ";
+	}
+	if($songNote->songNote->badStart) {
+		$badStart = $songNote->songNote->badStart;
+		$query .= " badStart = '$badStart', ";
+	}
+	if($songNote->songNote->badEnd) {
+		$badEnd = $songNote->songNote->badEnd;
+		$query .= " badEnd = '$badEnd', ";
+	}
+	$query = rtrim($query, ",");
+	$query = rtrim($query, ", ");
+	$query .= " WHERE id = $id ";
+	
+	mylog("query: $query");
+	
+	$result = $connection->query($query);
+	mylog("update query result: $result");
+	
+	#$outp = $result->fetch_all(MYSQLI_ASSOC);
+	#mylog("update query result as outp: $outp");
+	#mylog("update query result as json: " .  json_encode($outp));
+	
+	$connection->close();
+	#echo json_encode($outp);
+}
 
 function getSongNotes($connection, $gig_id) {
     
@@ -75,8 +140,8 @@ function getSongNotes($connection, $gig_id) {
 	  $outp .= '"gig":{"id": "'.$rs["gig_id"].'", "date": "'.$rs["gig_date"].'", "venue": "'.$rs["gig_venue"].'"},';
 	  $outp .= '"song":{"id": "'.$rs["song_id"].'", "name": "'.$rs["song_name"].'", "artist": "'.$rs["song_artist"].'"}}';
     }
-    #$outp ='{"songs":['.$outp.']}';
-    $outp ='['.$outp.']';
+    
+	$outp ='['.$outp.']';
     return $outp;
 }
 
@@ -105,9 +170,12 @@ function getSongNote($connection, $id, $user_uid) {
 	  $outp .= '"gig":{"id": "'.$rs["gig_id"].'", "date": "'.$rs["gig_date"].'", "venue": "'.$rs["gig_venue"].'"},';
 	  $outp .= '"song":{"id": "'.$rs["song_id"].'", "name": "'.$rs["song_name"].'", "artist": "'.$rs["song_artist"].'"}}';
     }
-    #$outp ='{"songs":['.$outp.']}';
-    #$outp ='['.$outp.']';
-    return $outp;
+    
+	return $outp;
+}
+
+function mylog($message) {
+	error_log("$message\n", 3, "C:\phplogs\php.log");
 }
 
 ?>

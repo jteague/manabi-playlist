@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
+
 import { MessageService } from '../message/message.service';
 import { Song } from '../../objects/song';
 import { Gig } from '../../objects/gig';
@@ -17,9 +19,7 @@ const httpOptions = {
 
 export class SongService {
 
-  private songsUrl : string = 'http://jeremiahteague.com/manabi_playlist_server/song.php'; // URL to the web api
-  //private songsUrl : string = 'api/songs'; // URL to the web api
-  //private gigsUrl : string = 'api/gigs'; // URL to the web api
+  private songsUrl : string = `${environment.apiUrl}song.php`; // URL to the web api
 
   constructor(
   	private http: HttpClient,

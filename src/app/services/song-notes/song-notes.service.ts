@@ -3,6 +3,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
+import { environment } from '../../environments/environment';
+
 import { MessageService } from '../message/message.service';
 import { Gig } from '../../objects/gig';
 import { Song } from '../../objects/song';
@@ -18,9 +20,7 @@ const httpOptions = {
 
 export class SongNotesService {
 
-  // http://jeremiahteague.com/manabiplaylistserver
-  private songNotesUrl : string = 'http://jeremiahteague.com/manabi_playlist_server/songNotes.php'; // URL to the web api
-  //private songNotesUrl : string = 'api/songNotes'; // URL to the web api
+  private songNotesUrl : string = `${environment.apiUrl}songNotes.php`; // URL to the web api
 
   constructor(
   	private http: HttpClient,
@@ -45,17 +45,22 @@ export class SongNotesService {
     updateSong(songNote: SongNote, user: string) {
       if(songNote.user != user) {
         console.log('Your user id does not match this song_note\'s user id');
-        return;
       }
 
-      const url = `${this.songNotesUrl}?operation=update`;
-      url += `&id=${songNote.id}`;
-      url += `&notes=${songNote.notes}`;
-      url += `&badHorns=${songNote.badHorns}`;
-      url += `&badRhythm=${songNote.badRhythm}`;
-      url += `&badStart=${songNote.badStart}`;
-      url += `&badEnd=${songNote.badEnd}`;
-      return this.http.put(url, songNote, httpOptions).pipe(
+      //$songNoteJson = "[test]";
+      //$songNoteJson = JSON.stringify(songNote);
+      console.log(`Updating song_note with id = ${songNote.id}::${JSON.stringify(songNote)}`);
+      //return;
+
+      //const url = `${this.songNotesUrl}?operation=update&songNote=${JSON.stringify(songNote)}`;
+      const url = `${this.songNotesUrl}`;
+      // url += `&id=${songNote.id}`;
+      // url += `&notes=${songNote.notes}`;
+      // url += `&badHorns=${songNote.badHorns}`;
+      // url += `&badRhythm=${songNote.badRhythm}`;
+      // url += `&badStart=${songNote.badStart}`;
+      // url += `&badEnd=${songNote.badEnd}`;
+      return this.http.put(url, JSON.stringify(songNote), httpOptions).pipe(
         tap(_ => this.log(`updated songNote id=${songNote.id}`)),
         catchError(this.handleError<any>('updateSongNote'))
       );
