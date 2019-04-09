@@ -47,20 +47,10 @@ export class SongNotesService {
         console.log('Your user id does not match this song_note\'s user id');
       }
 
-      //$songNoteJson = "[test]";
-      //$songNoteJson = JSON.stringify(songNote);
-      console.log(`Updating song_note with id = ${songNote.id}::${JSON.stringify(songNote)}`);
-      //return;
+      //console.log(`Updating song_note with id = ${songNote.id}::${JSON.stringify(songNote)}`);
 
-      //const url = `${this.songNotesUrl}?operation=update&songNote=${JSON.stringify(songNote)}`;
       const url = `${this.songNotesUrl}`;
-      // url += `&id=${songNote.id}`;
-      // url += `&notes=${songNote.notes}`;
-      // url += `&badHorns=${songNote.badHorns}`;
-      // url += `&badRhythm=${songNote.badRhythm}`;
-      // url += `&badStart=${songNote.badStart}`;
-      // url += `&badEnd=${songNote.badEnd}`;
-      return this.http.put(url, JSON.stringify(songNote), httpOptions).pipe(
+      return this.http.post(url, JSON.stringify(songNote), httpOptions).pipe(
         tap(_ => this.log(`updated songNote id=${songNote.id}`)),
         catchError(this.handleError<any>('updateSongNote'))
       );
