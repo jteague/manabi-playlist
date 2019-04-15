@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { WindowRef } from '../windowref/window-ref.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,20 +6,23 @@ import { WindowRef } from '../windowref/window-ref.service';
 
 export class UtilitiesService {
 
-  constructor(private winRef: WindowRef) { }
+  constructor() { }
 
   getUserGuid() : string {
-    var nav = this.winRef.nativeWindow.navigator;
-    var screen = this.winRef.nativeWindow.screen;
+    
+    if(!localStorage.getItem('user_uid')) {
+      console.log("No user guid. Generating one...");
+      var guid = this.getGuid();
+      localStorage.setItem('user_uid', guid);
+    }
 
-    var guid = "";
-    guid += nav.mimeTypes.length;
-    guid += nav.userAgent.replace(/\D+/g, '');
-    guid += nav.plugins.length;
-    guid += screen.height || '';
-    guid += screen.width || '';
-    guid += screen.pixelDepth || '';
+    return localStorage.getItem('user_uid');
+  }
 
-    return guid;
+  getGuid() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+      var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+      return v.toString(16);
+    });
   }
 }

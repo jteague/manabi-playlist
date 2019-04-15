@@ -138,7 +138,7 @@ function getSongNotes($connection, $gig_id, $user_uid) {
         JOIN song ON song_note.song_id = song.id 
         JOIN gig ON song_note.gig_id = gig.id 
         WHERE gig.id = $gig_id 
-		AND song_note.user_uid = $user_uid";
+		AND song_note.user_uid = '$user_uid'";
 	
     $result = $connection->query($query);
     
