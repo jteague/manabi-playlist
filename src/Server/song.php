@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 require_once ("database.php");
+require_once ("includes.php");
 
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 mysqli_set_charset($conn, "utf8");

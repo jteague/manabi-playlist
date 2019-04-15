@@ -3,6 +3,7 @@ header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Content-Type: application/json; charset=UTF-8");
 require_once ("database.php");
+require_once ("includes.php");
 
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 mysqli_set_charset($conn, "utf8");
@@ -23,12 +24,16 @@ if(!$operation) {
 switch($operation) {
     
     case "get":
-        if(isset($_GET['gig_id'])) {
+        if(isset($_GET['gig_id']) && isset($_GET['user_uid'])) {
+            $outp = getSongNotes($conn, $_GET['gig_id'], $_GET['user_uid']);
+            $conn->close();
+            echo($outp);
+        } else if(isset($_GET['gig_id'])) {
             $outp = getSongNotes($conn, $_GET['gig_id']);
             $conn->close();
             echo($outp);    
-        } else if(isset($_GET['id']) && isset($_GET['user_uid'])) {
-            $outp = getSongNote($conn, $_GET['id'], $_GET['user_uid']);
+        } else if(isset($_GET['id'])) {
+            $outp = getSongNote($conn, $_GET['id']);
             $conn->close();
             echo($outp);    
         }
@@ -119,10 +124,9 @@ function updateSongNote($connection, $songNote) {
 	$connection->close();
 }
 
-function getSongNotes($connection, $gig_id) {
+function getSongNotes($connection, $gig_id, $user_uid) {
     
-    $result = $connection->query(
-        "SELECT song_note.id as id, 
+	$query = "SELECT song_note.id as id, 
         user_uid as user_uid, 
 		gig.id as gig_id, 
         gig.venue as gig_venue,
@@ -133,7 +137,10 @@ function getSongNotes($connection, $gig_id) {
         FROM song_note 
         JOIN song ON song_note.song_id = song.id 
         JOIN gig ON song_note.gig_id = gig.id 
-        WHERE gig.id = $gig_id");
+        WHERE gig.id = $gig_id 
+		AND song_note.user_uid = $user_uid";
+	
+    $result = $connection->query($query);
     
     $outp = "";
     while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
@@ -148,8 +155,7 @@ function getSongNotes($connection, $gig_id) {
     return $outp;
 }
 
-function getSongNote($conn, $id, $user_uid) {
-    
+function getSongNote($conn, $id) {
     
 	$query = "SELECT song_note.id as id, 
         song_note.user_uid as user_uid, 
@@ -167,8 +173,7 @@ function getSongNote($conn, $id, $user_uid) {
         FROM song_note 
         JOIN song ON song_note.song_id = song.id 
         JOIN gig ON song_note.gig_id = gig.id
-        WHERE song_note.id = $id
-        AND song_note.user_uid = $user_uid";
+        WHERE song_note.id = $id";
 	
 	$result = $conn->query($query);
     
@@ -190,20 +195,6 @@ function getSongNote($conn, $id, $user_uid) {
     }
 	
 	return $outp;
-}
-
-function cleanInText($conn, $str) {
-	// For cleaning incoming text
-	return mysqli_real_escape_string($conn, $str);
-}
-
-function clean($conn, $str) {
-	// For cleaning outgoing text
-	return str_replace("\'", "'", mysqli_real_escape_string($conn, $str));
-}
-
-function mylog($message) {
-	error_log("$message\n", 3, "C:\phplogs\php.log");
 }
 
 ?>

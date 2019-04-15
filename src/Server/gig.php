@@ -2,6 +2,7 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
 require_once ("database.php");
+require_once ("includes.php");
 
 $conn = new mysqli($db_host, $db_user, $db_pass, $db_name);
 mysqli_set_charset($conn, "utf8");
@@ -22,7 +23,7 @@ if(!$operation) {
 switch($operation) {
     
     case "get":
-        $outp = getGigs($conn);
+		$outp = getGigs($conn);
         $conn->close();
         echo($outp);
         break;
@@ -46,7 +47,7 @@ switch($operation) {
 
 function getGigs($connection) {
     
-    $result = $connection->query("SELECT id, date, venue FROM gig");
+	$result = $connection->query("SELECT id, date, venue FROM gig");
     
     $outp = "";
     while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
