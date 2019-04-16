@@ -16,6 +16,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SongSearchComponent } from './components/song-search/song-search.component';
 
 import { WindowRef } from './services/windowref/window-ref.service';
+import { GigCreateComponent } from './components/gig-create/gig-create.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { WindowRef } from './services/windowref/window-ref.service';
     SongDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    SongSearchComponent
+    SongSearchComponent,
+    GigCreateComponent
   ],
   imports: [
     BrowserModule,

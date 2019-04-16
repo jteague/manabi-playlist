@@ -20,6 +20,7 @@ export class PlaylistComponent implements OnInit {
   songNotes: SongNote[];
   userGuid: string;
   gigDb: Gig;
+  offset: number;
 
   constructor(
   	private route: ActivatedRoute,
@@ -38,6 +39,7 @@ export class PlaylistComponent implements OnInit {
     this.songNotesService.getSongNotes(gigid, this.userGuid).subscribe(sn => {
       this.songNotes = sn;
       this.gig = sn[0].gig;
+      this.offset = this.songNotes[0].id - 1;
     });
   }
 

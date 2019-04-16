@@ -4,5 +4,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost/manabi_playlist/',
+  apiUrl: 'http://localhost:8080/manabi_playlist/',
 };

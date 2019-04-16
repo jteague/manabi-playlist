@@ -2,11 +2,11 @@
 
 	<h2>{{gig.venue}} ({{gig.date | date: 'MM/dd/yyyy'}}) Setlist:</h2>
 
-	<app-song-search></app-song-search>
+	<!-- <app-song-search></app-song-search> -->
 
 	<ul class="songs">
 		<li *ngFor="let songNote of songNotes" routerLink="/detail/{{songNote.id}}">
-			<span class="badge">{{songNote.id}}</span> {{songNote.song.name}}
+			<span class="badge">{{songNote.id - offset}}</span> {{songNote.song.name}}
 		</li>
 	</ul>
 

@@ -27,8 +27,7 @@ export class SongNotesService {
   	private messageService: MessageService) { }
 
     getSongNotes(gigId: number, user: string): Observable<SongNote[]> {
-      console.log(`we're in SongNotesService.getSongNotes(gigId: ${gigId}, user: ${user})`);
-      console.log(`localStorage.user_uid: ${localStorage.getItem('user_uid')}`);
+      // get song_notes for this gig and user (server creates song_notes if they don't exist)
       const url = `${this.songNotesUrl}?operation=get&gig_id=${gigId}&user_uid=${user}`;
       return this.http.get<SongNote[]>(url).pipe(
           tap(_ => this.log(`fetched songNotes count: ${[].length}`)),
