@@ -4,10 +4,27 @@
 
 	<!-- <div><span class="label">ID: </span>{{song.id}}</div> -->
 	<!-- <div> <span class="label">Name: </span>{{song.name}}</div> -->
-	<div> <span class="label">Bad Horns: </span><input type="checkbox" [(ngModel)]="songNote.badHorns" /></div>
-	<div> <span class="label">Bad Rhythm: </span><input type="checkbox" [(ngModel)]="songNote.badRhythm" /></div>
-	<div> <span class="label">Bad Start: </span><input type="checkbox" [(ngModel)]="songNote.badStart" /></div>
-	<div> <span class="label">Bad End: </span><input type="checkbox" [(ngModel)]="songNote.badEnd" /></div>
+	<div>
+		<label class="label">Bad Horns: </label>
+		<input type="checkbox" [(ngModel)]="songNote.badHorns" class="regular-checkbox" />
+		<span class="checkmark"></span>
+	</div>
+	<div>
+		<label class="label">Bad Rhythm: </label>
+		<input type="checkbox" [(ngModel)]="songNote.badRhythm" class="regular-checkbox" />
+		<span class="checkmark"></span>
+	</div>
+	<div>
+		<label class="label">Bad Start: </label>
+		<input type="checkbox" [(ngModel)]="songNote.badStart" class="regular-checkbox" />
+		<span class="checkmark"></span>
+	</div>
+	<div>
+		<label class="label">Bad End: </label>
+		<input type="checkbox" [(ngModel)]="songNote.badEnd" class="regular-checkbox" />
+		<span class="checkmark"></span>
+	</div>
+
 	<div>
 		<label><span class="label">Notes:</span>
 			<textarea [(ngModel)]="songNote.notes" rows="4" cols="20" placeholder="notes..."></textarea>

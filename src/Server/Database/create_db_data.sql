@@ -37,9 +37,6 @@ ALTER TABLE `song` ADD PRIMARY KEY (`id`);
 ALTER TABLE `gig_song` ADD PRIMARY KEY (`id`);
 ALTER TABLE `song_note` ADD PRIMARY KEY (`id`);
 
--- Insert gigs
-INSERT INTO `gig` (`id`, `venue`, `date`) VALUES (1, 'Rio', '2019-04-02');
-
 -- Insert songs
 INSERT INTO `song` (`id`, `name`, `artist`) VALUES
 (1, 'Canoa Ranchaa', 'Grupo Niche'),
@@ -95,30 +92,31 @@ INSERT INTO `song` (`id`, `name`, `artist`) VALUES
 (51, 'Tu Carinito', 'Puerto Rican Power'),
 (52, 'Cumbia Sobre El Mar', 'Quantic');
 
+-- Insert gigs
+INSERT INTO `gig` (`id`, `venue`, `date`) VALUES (1, 'Foothills Mall', '2019-04-16');
+
 -- Insert gig_songs
 INSERT INTO `gig_song` (`id`, `song_id`, `gig_id`) VALUES
 (1, 52, 1),
-(2, 1, 1),
-(3, 6, 1),
-(4, 5, 1),
-(5, 24, 1),
-(6, 27, 1),
-(7, 4, 1),
-(8, 44, 1),
-(9, 51, 1),
-(10, 36, 1),
-(11, 17, 1),
-(12, 37, 1),
-(13, 40, 1),
-(14, 11, 1),
-(15, 29, 1),
-(16, 2, 1),
-(17, 28, 1),
-(18, 15, 1);
+(2, 39, 1),
+(3, 48, 1),
+(4, 16, 1),
+(5, 46, 1),
+(6, 44, 1),
+(7, 45, 1),
+(8, 38, 1),
+(9, 2, 1),
+(10, 15, 1),
+(11, 28, 1),
+(12, 40, 1),
+(13, 3, 1),
+(14, 14, 1),
+(15, 43, 1),
+(16, 5, 1);
 
 ALTER TABLE `gig` MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `song` MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
-ALTER TABLE `gig_song` MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+ALTER TABLE `gig_song` MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 ALTER TABLE `song_note` MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 COMMIT;
