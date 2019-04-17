@@ -7,7 +7,7 @@ export class SongNote {
 
 	constructor(public id: number, public gig: Gig, public song: Song, public user: string,
 		public notes: string, public badHorns: boolean, public badRhythm: boolean,
-		public badStart: boolean, public badEnd: boolean) {
+		public badStart: boolean, public badEnd: boolean, public badVocals: boolean) {
 
 		}
 

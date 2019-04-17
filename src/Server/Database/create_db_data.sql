@@ -29,7 +29,8 @@ CREATE TABLE `song_note` (
 	`bad_horns` tinyint(1) NOT NULL DEFAULT '0',
 	`bad_rhythm` tinyint(1) NOT NULL DEFAULT '0',
 	`bad_start` tinyint(1) NOT NULL DEFAULT '0',
-	`bad_end` tinyint(1) NOT NULL DEFAULT '0'
+	`bad_end` tinyint(1) NOT NULL DEFAULT '0',
+	`bad_vocals` tinyint(1) NOT NULL DEFAULT '0'
 );
 
 ALTER TABLE `gig` ADD PRIMARY KEY (`id`);
@@ -93,7 +94,8 @@ INSERT INTO `song` (`id`, `name`, `artist`) VALUES
 (52, 'Cumbia Sobre El Mar', 'Quantic');
 
 -- Insert gigs
-INSERT INTO `gig` (`id`, `venue`, `date`) VALUES (1, 'Foothills Mall', '2019-04-16');
+INSERT INTO `gig` (`id`, `venue`, `date`) VALUES (1, 'Foothills Mall', '2019-04-20');
+INSERT INTO `gig` (`id`, `venue`, `date`) VALUES (1, 'New Belguim', '2019-04-19');
 
 -- Insert gig_songs
 INSERT INTO `gig_song` (`id`, `song_id`, `gig_id`) VALUES
@@ -113,6 +115,21 @@ INSERT INTO `gig_song` (`id`, `song_id`, `gig_id`) VALUES
 (14, 14, 1),
 (15, 43, 1),
 (16, 5, 1);
+
+INSERT INTO `gig_song` (`song_id`, `gig_id`) VALUES
+(52, 2),
+(39, 2),
+(48, 2),
+( 16, 2),
+( 46, 2),
+( 44, 2),
+( 45, 2),
+( 38, 2),
+( 2, 2),
+( 15, 2),
+( 28, 2),
+( 43, 2);
+
 
 ALTER TABLE `gig` MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 ALTER TABLE `song` MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;

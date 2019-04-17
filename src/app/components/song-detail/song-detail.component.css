@@ -20,6 +20,7 @@ button:hover {
 
 .regular-checkbox {
 	-webkit-appearance: none;
+
   height: 25px;
   width: 25px;
   background-color: #eee;
@@ -46,4 +47,24 @@ button:hover {
 	color: #FFF;
   height: 25px;
   width: 25px;
+}
+
+.container {
+  display: inline-block;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto;
+  padding: 10px;
+}
+
+.grid-item-left {
+  padding: 5px;
+  text-align: left;
+}
+
+.grid-item-right {
+  padding: 5px;
+  text-align: right;
 }

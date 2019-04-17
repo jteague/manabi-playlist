@@ -101,6 +101,10 @@ function updateSongNote($connection, $songNote) {
 		$badRhythm = $songNote->badRhythm == 1 ? 1 : 0;
 		$query .= " bad_rhythm = '$badRhythm', ";
 	}
+	if(property_exists($songNote, "badVocals")) {
+		$badVocals = $songNote->badVocals == 1 ? 1 : 0;
+		$query .= " bad_vocals = '$badVocals', ";
+	}
 	if(property_exists($songNote, "badStart")) {
 		$badStart = $songNote->badStart == 1 ? 1 : 0;
 		$query .= " bad_start = '$badStart', ";
@@ -177,6 +181,7 @@ function getSongNote($conn, $id) {
         song_note.notes as notes, 
         song_note.bad_horns as bad_horns, 
         song_note.bad_rhythm as bad_rhythm, 
+        song_note.bad_vocals as bad_vocals, 
         song_note.bad_start as bad_start, 
         song_note.bad_end as bad_end, 
         gig.id as gig_id, 
@@ -202,6 +207,7 @@ function getSongNote($conn, $id) {
 	  
 	  $outp .= '"badHorns":'  . ($rs["bad_horns"] == 1 ? "true" : "false") . ',';
 	  $outp .= '"badRhythm":'  . ($rs["bad_rhythm"] == 1 ? "true" : "false") . ',';
+	  $outp .= '"badVocals":'  . ($rs["bad_vocals"] == 1 ? "true" : "false") . ',';
 	  $outp .= '"badStart":'  . ($rs["bad_start"] == 1 ? "true" : "false") . ',';
 	  $outp .= '"badEnd":'  . ($rs["bad_end"] == 1 ? "true" : "false") . ',';
 	  

@@ -1,38 +1,62 @@
-<div *ngIf="songNote">
+<div *ngIf="songNote" class="container">
 
 	<h2>{{songNote.song.name | uppercase}}</h2>
 
 	<!-- <div><span class="label">ID: </span>{{song.id}}</div> -->
 	<!-- <div> <span class="label">Name: </span>{{song.name}}</div> -->
-	<div>
-		<label class="label">Bad Horns: </label>
-		<input type="checkbox" [(ngModel)]="songNote.badHorns" class="regular-checkbox" />
-		<span class="checkmark"></span>
-	</div>
-	<div>
-		<label class="label">Bad Rhythm: </label>
-		<input type="checkbox" [(ngModel)]="songNote.badRhythm" class="regular-checkbox" />
-		<span class="checkmark"></span>
-	</div>
-	<div>
-		<label class="label">Bad Start: </label>
-		<input type="checkbox" [(ngModel)]="songNote.badStart" class="regular-checkbox" />
-		<span class="checkmark"></span>
-	</div>
-	<div>
-		<label class="label">Bad End: </label>
-		<input type="checkbox" [(ngModel)]="songNote.badEnd" class="regular-checkbox" />
-		<span class="checkmark"></span>
+	<div class="grid-container">
+		<div class="grid-item-left">
+			<label class="label">Bad Horns: </label>
+		</div>
+		<div class="grid-item-right">
+			<input type="checkbox" [(ngModel)]="songNote.badHorns" class="regular-checkbox" />
+			<span class="checkmark"></span>
+		</div>
+		<div class="grid-item-left">
+			<label class="label">Bad Rhythm: </label>
+		</div>
+		<div class="grid-item-right">
+			<input type="checkbox" [(ngModel)]="songNote.badRhythm" class="regular-checkbox" />
+			<span class="checkmark"></span>
+		</div>
+		<div class="grid-item-left">
+			<label class="label">Bad Vocals: </label>
+		</div>
+		<div class="grid-item-right">
+			<input type="checkbox" [(ngModel)]="songNote.badVocals" class="regular-checkbox" />
+			<span class="checkmark"></span>
+		</div>
+		<div class="grid-item-left">
+			<label class="label">Bad Start: </label>
+		</div>
+		<div class="grid-item-right">
+			<input type="checkbox" [(ngModel)]="songNote.badStart" class="regular-checkbox" />
+			<span class="checkmark"></span>
+		</div>
+		<div class="grid-item-left">
+			<label class="label">Bad End: </label>
+		</div>
+		<div class="grid-item-right">
+			<input type="checkbox" [(ngModel)]="songNote.badEnd" class="regular-checkbox" />
+			<span class="checkmark"></span>
+		</div>
 	</div>
 
-	<div>
-		<label><span class="label">Notes:</span>
+	<div class="grid-container">
+		<div class="grid-item-left">
+			<label><span class="label">Notes:</span></label>
+		</div>
+		<div class="grid-item-right">
 			<textarea [(ngModel)]="songNote.notes" rows="4" cols="20" placeholder="notes..."></textarea>
-		</label>
+		</div>
 	</div>
-	<div>
-		<button (click)="save()">Save</button>
-	</div>
+
 </div>
 
-<button (click)="goBack()">Go Back</button>
+<div>
+	<button (click)="save()">Save</button>
+</div>
+
+<div>
+	<button (click)="goBack()">Go Back</button>
+</div>
