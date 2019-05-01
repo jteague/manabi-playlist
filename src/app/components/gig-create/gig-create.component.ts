@@ -1,4 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { Gig } from '../../objects/gig'
+import { Song } from '../../objects/song';
+import { GigSong } from '../../objects/gig-song';
+import { SongService } from '../../services/song/song.service';
 
 @Component({
   selector: 'app-gig-create',
@@ -7,9 +12,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GigCreateComponent implements OnInit {
 
-  constructor() { }
+  @Input() gig: Gig;
+  gigSongs : GigSong[];
+
+  constructor(private songService: SongService) {
+    this.gig = new Gig(-1, '', '');
+    this.gigSongs = [];
+  }
 
   ngOnInit() {
+
+  }
+
+  removeGigSong() : void {
+
+  }
+
+  saveGig() : void {
+
   }
 
 }

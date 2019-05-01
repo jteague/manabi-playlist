@@ -23,7 +23,7 @@ if(!$operation) {
 switch($operation) {
     
     case "get":
-        $outp = getSongs($conn, $_GET['name_like']);
+        $outp = getSongs($conn, $_GET['searchTerm'] ?? '');
         $conn->close();
         echo($outp);
         break;
@@ -51,7 +51,7 @@ function getSongs($connection, $name_like_param) {
         :  "";
             
     if($name_like) {
-        $result = $connection->query("SELECT id, name, artist FROM song WHERE name LIKE  '%$name_like%'");
+        $result = $connection->query("SELECT id, name, artist FROM song WHERE name LIKE '%$name_like%' or artist LIKE '%$name_like%'");
     }
     else {
         $result = $connection->query("SELECT id, name, artist FROM song");
@@ -60,11 +60,11 @@ function getSongs($connection, $name_like_param) {
     $outp = "";
     while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
       if ($outp != "") {$outp .= ",";}
-      $outp .= '{"ID":"'  . $rs["id"] . '",';
-      $outp .= '"Name":"'  . $rs["name"] . '",';
-      $outp .= '"Artist":"'. $rs["artist"]     . '"}';
+      $outp .= '{"id":"'  . $rs["id"] . '",';
+      $outp .= '"name":"'  . $rs["name"] . '",';
+      $outp .= '"artist":"'. $rs["artist"]     . '"}';
     }
-    $outp ='{"songs":['.$outp.']}';
+    $outp ='['.$outp.']';
     return $outp;
 }
 

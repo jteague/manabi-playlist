@@ -71,11 +71,12 @@ export class SongService {
   }
 
   searchSongs(term: string) : Observable<Song[]> {
+    
     if(!term.trim()) {
       return of([]);
     }
 
-    return this.http.get<Song[]>(`${this.songsUrl}/?name=${term}`).pipe(
+    return this.http.get<Song[]>(`${this.songsUrl}/?operation=get&searchTerm=${term}`).pipe(
       tap(_ => this.log(`found songs matching "${term}"`)),
       catchError(this.handleError<Song[]>('searchSongs', []))
     );

@@ -1,3 +1,27 @@
 <div>
-  
+
+	<h2>Create Gig</h2>
+
+  <div>
+    Venue: <input type="text" [(ngModel)]="gig.venue" value=""/>
+    Date: <input type="date" [(ngModel)]="gig.date" value=""/>
+  </div>
+
+  <div *ngIf="gigSongs">
+    <ul class="gigSongs">
+  		<li *ngFor="let gigSong of gigSongs">
+        <div *ngIf="gigSong">
+    			<span class="badge">{{gigSong.id}}</span> {{gigSong.song.name}}
+          <button (click)="removeGigSong()">Remove</button>
+        </div>
+  		</li>
+  	</ul>
+  </div>
+
+  <app-song-search></app-song-search>
+
+  <div>
+  	<button (click)="saveGig()">Save Gig</button>
+  </div>
+
 </div>
